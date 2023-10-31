@@ -12,8 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [17]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [17] # Change to a supported Node.js version
 
     services:
       redis:
@@ -24,26 +23,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          path: DevOps # Set the target path within your repository
 
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '17'
+          node-version: '17' # Change to a supported Node.js version
 
       - name: Install dependencies
         run: npm ci
-        working-directory: DevOps # Set the working directory to the "DevOps" directory
 
       - name: Run npm install
         run: npm install
-        working-directory: DevOps # Set the working directory to the "DevOps" directory
 
       - name: Build code
         run: npm run build --if-present
-        working-directory: DevOps # Set the working directory to the "DevOps" directory
 
       - name: Run tests
         run: npm test
-        working-directory: DevOps # Set the working directory to the "DevOps" directory
