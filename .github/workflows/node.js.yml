@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [17] # Change to a supported Node.js version
+        node-version: [18.X] # Change to a supported Node.js version
 
     services:
       redis:
@@ -27,7 +27,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '17' # Change to a supported Node.js version
+          node-version: '18.X' # Change to a supported Node.js version
 
       - name: Install dependencies
         run: npm ci
