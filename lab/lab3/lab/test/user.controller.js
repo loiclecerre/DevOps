@@ -8,7 +8,7 @@ describe('User', () => {
     // Clean DB before each test
     db.flushdb()
   })
-
+  
   describe('Create', () => {
 
     it('create a new user', (done) => {
@@ -75,7 +75,7 @@ describe('User', () => {
         })
       })
     })
-
+  
     it('can not get a user when it does not exist', (done) => {
       userController.get('invalid', (err, result) => {
         expect(err).to.not.be.equal(null)
