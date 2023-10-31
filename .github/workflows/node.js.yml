@@ -1,45 +1,49 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [14]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-        
+
     services:
-    redis:
-      image: redis
-      ports:
-        - 6379:6379
-    
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+
     steps:
-    - uses: actions/checkout@v4
-    with:
-    	path: 'lab/lab3/lab'
-    
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
-    
-    - run: npm ci   
-    	working-directory: 'lab/lab3/lab'
-    - run: npm install
-    	working-directory: 'lab/lab3/lab'
-    - run: npm run build --if-present
-    	working-directory: 'lab/lab3/lab'
-    - run: npm test
-    	working-directory: 'lab/lab3/lab'
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: 'lab/lab3/lab'
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: 'lab/lab3/lab'
+
+      - name: Run npm install
+        run: npm install
+        working-directory: 'lab/lab3/lab'
+
+      - name: Build code
+        run: npm run build --if-present
+        working-directory: 'lab/lab3/lab'
+
+      - name: Run tests
+        run: npm test
+        working-directory: 'lab/lab3/lab'
