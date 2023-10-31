@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.17.1]
+        node-version: [14]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         
     services:
@@ -27,11 +27,19 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+    with:
+    	path: 'lab/lab3/lab'
+    
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18.17.1'
+        node-version: '14'
+    
     - run: npm ci   
+    	working-directory: 'lab/lab3/lab'
     - run: npm install
+    	working-directory: 'lab/lab3/lab'
     - run: npm run build --if-present
+    	working-directory: 'lab/lab3/lab'
     - run: npm test
+    	working-directory: 'lab/lab3/lab'
